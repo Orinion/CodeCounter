@@ -13,7 +13,7 @@ import javax.swing.JFileChooser;
  * @author Jakob
  */
 public class mainWindow extends javax.swing.JFrame {
-
+    String[] fileEndings = new String[]{"java"};
     /**
      * Creates new form mainWindow
      */
@@ -106,6 +106,7 @@ public class mainWindow extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser(path);
         fc.setDialogTitle("Choose the Folder/File");
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fc.setFileFilter(new SourceFileFilter(fileEndings));
         if (fc.showOpenDialog(jButtonChangePath) == JFileChooser.APPROVE_OPTION) {
             jTextFieldPath.setText( fc.getSelectedFile().getAbsolutePath());
         }
@@ -116,7 +117,7 @@ public class mainWindow extends javax.swing.JFrame {
        File file = new File(path);
        if(file.exists())
        {
-           LineCounter lineCounter = new LineCounter(file);
+           LineCounter lineCounter = new LineCounter(file,new SourceFileFilter(fileEndings));
            new LineInfo(lineCounter).setVisible(true);
        }
        else

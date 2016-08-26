@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import javax.swing.filechooser.FileFilter;
 
 /**
  *
@@ -16,16 +17,22 @@ import java.io.IOException;
  */
 public class LineCounter {
     private File rootFile;
+    private FileFilter fileFilter;
+    
     private int lines=0;
     private int directories=0;
     private int sourceFiles=0;
-    public LineCounter(File file) {
-        this.rootFile = file;
+    public LineCounter(File file,SourceFileFilter filter) {
+        this.rootFile = file;        
+        this.fileFilter = filter;
+        
         this.calc();
     }
     private void getLines(File file)
     {
         if(!file.exists())
+            return;
+        if(!fileFilter.accept(file))
             return;
         if(file.isDirectory()){
             directories++;
@@ -34,6 +41,7 @@ public class LineCounter {
         }
         else
         {
+            
             sourceFiles++;
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(file));
