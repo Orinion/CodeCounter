@@ -1,2 +1,2 @@
 # CodeCounter
-Simple Java programm to calculate the number of lines a prohect has.
+CodeCounter is a simple Java programm, which calculates the number of code-lines.
