@@ -13,7 +13,7 @@ import javax.swing.filechooser.FileFilter;
  * @author Jakob
  */
 public class SourceFileFilter extends FileFilter{
-    String[] allowed;
+    public String[] allowed;
     public SourceFileFilter( String[] fileEndings) {
         this.allowed = fileEndings;
     }
